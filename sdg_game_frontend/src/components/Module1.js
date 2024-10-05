@@ -5,12 +5,13 @@ import Modal from 'react-modal'; // Import Modal from react-modal
 import poverty from '../assets/videos/Social Equity and Well Being.mp4'
 import health from '../assets/videos/Governance and Ecosystems.mp4'
 import growth from '../assets/videos/Economic Growth and Infrastructure.mp4'
+import climate from '../assets/videos/Environmental Sustainability.mp4'
 
 const sdgGroups = [
   { title: "No Poverty & Zero Hunger", videoUrl: poverty },
   { title: "Good Health & Quality Education", videoUrl: health },
   { title: "Affordable Energy & Economic Growth", videoUrl: growth },
-  { title: "Climate Action & Life Below Water", videoUrl: "/path/to/video5.mp4" },
+  { title: "Climate Action & Life Below Water", videoUrl: climate },
 ];
 
 const Module1 = ({ onComplete }) => {
