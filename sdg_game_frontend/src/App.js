@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import axios from 'axios';
 import LandingPage from './components/LandingPage';
 import Module1 from './components/Module1';
 import Module2 from './components/Module2';
@@ -18,6 +19,19 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet-defaulticon-compatibility';
 
 const App = () => {
+  useEffect(() => {
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';  // Default API URL
+    console.log(apiUrl);  // Check if the API URL is logged correctly
+
+    // Make the API request
+    axios.get(apiUrl)
+      .then(response => {
+        console.log('API Response:', response.data);  // Log the response data
+      })
+      .catch(error => {
+        console.error('API error:', error);  // Log any error
+      });
+  }, []);
   const [progress, setProgress] = useState({
     module1: false,
     module2: false,

@@ -47,7 +47,7 @@ const Header = () => {
 
           {/* Start Your Quest Button */}
           <Link to="/sdg-info" className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
-            Start Your Quest
+            Login
           </Link>
           
         </div>
