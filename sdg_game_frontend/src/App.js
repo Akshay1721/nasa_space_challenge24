@@ -8,15 +8,12 @@ import Module3 from './components/Module3';
 import Badge from './components/Badge';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
-import 'leaflet-defaulticon-compatibility';
+import 'leaflet-defaulticon-compatibility'; // Single import for compatibility
 import SatelliteMap from './SatelliteMap';
 import Header from './components/Header';  // Import Header (Navbar)
 import RainForcastMap from './components/RainForcastMap';
-
-// Add the necessary CSS imports
-import 'leaflet/dist/leaflet.css';
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
-import 'leaflet-defaulticon-compatibility';
+import Login from './components/Login';  // Import Login page
+import Register from './components/Register';
 
 const App = () => {
   useEffect(() => {
@@ -30,8 +27,9 @@ const App = () => {
       })
       .catch(error => {
         console.error('API error:', error);  // Log any error
-      });
-  }, []);
+      });
+  }, []);
+
   const [progress, setProgress] = useState({
     module1: false,
     module2: false,
@@ -84,7 +82,14 @@ const App = () => {
 
           {/* Articles Route (Placeholder) */}
           <Route path="/articles" element={<div>Articles Page</div>} />
+
+          {/* Rain Forecast Map */}
           <Route path="/rainforcast-map" element={<RainForcastMap />} />
+
+          {/* Login Route */}
+          <Route path="/login" element={<Login />} /> {/* Ensure the Login page is routed */}
+          {/* Register Route */}
+          <Route path="/register" element={<Register />} /> {/* Ensure the Register page is routed */}
         </Routes>
       </div>
     </Router>
