@@ -15,10 +15,11 @@ import RainForcastMap from './components/RainForcastMap';
 import Login from './components/Login';  // Import Login page
 import Register from './components/Register';
 import { SDG1Quiz } from './components/QuizModule';
+import Puzzle from './components/Puzzle';
 
 const App = () => {
   useEffect(() => {
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';  // Default API URL
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000/';  // Default API URL
     console.log(apiUrl);  // Check if the API URL is logged correctly
 
     // Make the API request
@@ -92,6 +93,7 @@ const App = () => {
           {/* Register Route */}
           <Route path="/register" element={<Register />} /> {/* Ensure the Register page is routed */}
           <Route path="/sdg1-quiz" element={<SDG1Quiz />} />
+          <Route path="/puzzle" element={<Puzzle />} /> {/* Puzzle game route */}
         </Routes>
       </div>
     </Router>

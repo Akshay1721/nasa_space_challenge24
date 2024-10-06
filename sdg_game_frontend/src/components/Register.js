@@ -1,28 +1,58 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Register = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [schoolName, setSchoolName] = useState('');
+  const [password2, setPassword2] = useState('');  // Confirm password
+  const [error, setErrorMessage] = useState(null);  // To display error messages
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    // Logic for registration can be added here
-    navigate('/Login'); // Redirect to landing page after registration
-  };
+  const handleRegister = async (e) => {
+    e.preventDefault();  // Prevent default form submission behavior
+
+    const formData = {
+        username: name,
+        email: email,
+        password1: password,
+        password2: password2,
+    };
+
+    try {
+        // Make sure the method is POST
+        const response = await fetch('/api/register/', {
+            method: 'POST',  // Use POST method here
+            headers: {
+                'Content-Type': 'application/json',  // Set headers to indicate JSON data
+            },
+            body: JSON.stringify(formData),  // Convert form data to JSON string
+        });
+
+        const data = await response.json();
+        if (data.success) {
+            // Handle success (e.g., navigate to login or show a success message)
+            console.log('Registration successful!');
+        } else {
+            // Handle error response from the backend
+            console.log('Registration failed:', data.errors);
+        }
+    } catch (error) {
+        console.error('An error occurred:', error);
+    }
+};
+
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
       <div className="bg-[#7bb2f2] p-8 rounded-lg shadow-md w-3/4 max-w-lg">
         <h2 className="text-white text-2xl font-bold mb-6">Register</h2>
+        {error && <p className="text-red-500">{error}</p>}
         <form onSubmit={handleRegister}>
           <div className="mb-4">
-            <label className="block text-white text-sm font-bold mb-2" htmlFor="name">
-              Name
-            </label>
+            <label className="block text-white text-sm font-bold mb-2" htmlFor="name">Name</label>
             <input
               className="w-full p-3 rounded-md border border-gray-300 focus:outline-none"
               type="text"
@@ -34,9 +64,7 @@ const Register = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-white text-sm font-bold mb-2" htmlFor="email">
-              Email
-            </label>
+            <label className="block text-white text-sm font-bold mb-2" htmlFor="email">Email</label>
             <input
               className="w-full p-3 rounded-md border border-gray-300 focus:outline-none"
               type="email"
@@ -48,23 +76,7 @@ const Register = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-white text-sm font-bold mb-2" htmlFor="schoolName">
-              School Name
-            </label>
-            <input
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none"
-              type="text"
-              id="schoolName"
-              placeholder="Enter your school name"
-              value={schoolName}
-              onChange={(e) => setSchoolName(e.target.value)}
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-white text-sm font-bold mb-2" htmlFor="password">
-              Password
-            </label>
+            <label className="block text-white text-sm font-bold mb-2" htmlFor="password">Password</label>
             <input
               className="w-full p-3 rounded-md border border-gray-300 focus:outline-none"
               type="password"
@@ -75,18 +87,21 @@ const Register = () => {
               required
             />
           </div>
+          <div className="mb-4">
+            <label className="block text-white text-sm font-bold mb-2" htmlFor="password2">Confirm Password</label>
+            <input
+              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none"
+              type="password"
+              id="password2"
+              placeholder="Confirm your password"
+              value={password2}
+              onChange={(e) => setPassword2(e.target.value)}
+              required
+            />
+          </div>
           <button className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600">
             Register
           </button>
-          <p className="text-sm text-white mt-4">
-            Already have an account?{' '}
-            <span
-              className="text-green-300 hover:text-green-500 cursor-pointer"
-              onClick={() => navigate('/')}
-            >
-              Login here
-            </span>
-          </p>
         </form>
       </div>
     </div>
