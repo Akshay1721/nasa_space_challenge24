@@ -14,6 +14,7 @@ import Header from './components/Header';  // Import Header (Navbar)
 import RainForcastMap from './components/RainForcastMap';
 import Login from './components/Login';  // Import Login page
 import Register from './components/Register';
+import { SDG1Quiz } from './components/QuizModule';
 
 const App = () => {
   useEffect(() => {
@@ -90,6 +91,7 @@ const App = () => {
           <Route path="/login" element={<Login />} /> {/* Ensure the Login page is routed */}
           {/* Register Route */}
           <Route path="/register" element={<Register />} /> {/* Ensure the Register page is routed */}
+          <Route path="/sdg1-quiz" element={<SDG1Quiz />} />
         </Routes>
       </div>
     </Router>
